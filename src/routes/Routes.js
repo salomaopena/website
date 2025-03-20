@@ -12,10 +12,10 @@ const authMiddleware = require('../middlewares/AuthMiddleware');
 
 // Rotas para categorias
 router.get('/list', categoryController.list);
-//router.post('/categories', authMiddleware, categoryController.addCategory);
+router.post('/add', /*authMiddleware,*/ categoryController.add);
 //router.get('/categories/:categoryId', categoryController.getCategoryById);
 //router.put('/categories/:categoryId', categoryController.updateCategory);
-router.delete('/delete/:categoryId', categoryController.deleteCategory);
+router.delete('/delete/:categoryId', categoryController.delete);
 
 
 // Rotas para comentários

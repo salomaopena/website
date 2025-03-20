@@ -33,6 +33,12 @@ app.use('/ratings', ratingRoutes);
 
 //rota para a página de notícias
 
+// app.get('/', (req, res) => {
+//     res.render('index', {
+//         title: 'News App',
+//         message: 'Welcome to the News App!'
+//     });
+// });
 
 
 
