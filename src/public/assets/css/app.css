@@ -1,0 +1,45 @@
+/*style.css*/
+:root{
+    --color-primary: #007BFF;
+    --color-secondary: #06757D;
+    --color-success: #28A745;
+    --color-warning: #FFC107;
+    --color-danger: #DC3545;
+    --color-senary: #FFF6C3;
+    --color-septenary: #111111;
+    --color-octonary: #2F2B24;
+}
+
+*{
+    font-family: "Rajdhani", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.nav-link{
+    color: #FFA54C;
+    font-size: 1.3rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.nav-link:hover{
+    transition: background-color 0.3s ease;
+}
+
+.text-justify{
+    text-align: justify;
+}
+
+.hero{
+    background: var(--color-primary);
+    color: #FFF;
+    padding: 2rem 0;
+}
