@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add News</title>
+    <!-- Importando o Bootstrap CSS a partir da pasta assets-->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+
+    <!-- fontawosome-->
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
+
+    <!-- font google-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+    <script src='assets/tinymce/tinymce.min.js' referrerpolicy="origin"></script>
+
+</head>
+
+<body>
+
+
+    <div class="container mt-5">
+        <div class="col-12 col-lg-8">
+            <form class="row g-3">
+
+                <div class="col-md-12">
+                    <label for="category" class="form-label">Categoria</label>
+                    <select name="category" id="category" class="form-select">
+                        <option selected>Escolha</option>
+                        <option>...</option>
+                    </select>
+                </div>
+
+                <div class="col-12">
+                    <label for="title" class="form-label">Título</label>
+                    <input type="text" class="form-control" id="title" placeholder="Título da notícia">
+                </div>
+
+                <div class="col-12">
+                    <div class="form-floating">
+                        <textarea id="newcontent"></textarea>
+
+                    </div>
+                </div>
+
+
+                <div class="col-12">
+                    <input type="hidden" class="form-control" id="slug" name="slug">
+                    <input type="hidden" class="form-control" id="author" name="author">
+
+                    <button type="submit" class="btn btn-outline-success">
+                        <i class="fas fa-save"></i> Publicar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('title').addEventListener('change', function () {
+            var title = this.value;
+            var slug = title.toLowerCase().replace(/ /g, '-');
+            document.getElementById('slug').value = slug;
+
+            console.log(slug);
+        });
+
+
+        tinymce.init({
+            selector: '#newcontent',
+            menu: {
+                file: { title: 'File', items: 'newdocument restoredraft | preview | importword exportpdf exportword | print | deleteallconversations' },
+                edit: { title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall | searchreplace' },
+                view: { title: 'View', items: 'code revisionhistory | visualaid visualchars visualblocks | spellchecker | preview fullscreen | showcomments' },
+                insert: { title: 'Insert', items: 'image link media addcomment pageembed codesample inserttable | math | charmap emoticons hr | pagebreak nonbreaking anchor tableofcontents | insertdatetime' },
+                format: { title: 'Format', items: 'bold italic underline strikethrough superscript subscript codeformat | styles blocks fontfamily fontsize align lineheight | forecolor backcolor | language | removeformat' },
+                tools: { title: 'Tools', items: 'spellchecker spellcheckerlanguage | a11ycheck code wordcount' },
+                table: { title: 'Table', items: 'inserttable | cell row column | advtablesort | tableprops deletetable' },
+                help: { title: 'Help', items: 'help' }
+            }
+        });
+    </script>
+
+
+
+    <script src="/assets/js/category.js"></script>
+    <!-- Importando o jQuery e Bootstrap JS a partir da pasta assets-->
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/fontawesome/js/all.min.js"></script>
+
+</body>
+
+</html>

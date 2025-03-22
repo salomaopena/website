@@ -5,20 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Category</title>
+    <!-- Importando o Bootstrap CSS a partir da pasta assets-->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+
+    <!-- fontawosome-->
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
+
+    <!-- font google-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-    <h1>Inserir a categoria</h1>
-    <form method="POST">
-        <label for="name">Nome:</label>
-        <input type="text" id="name" name="name">
 
-        <label for="slug">Slug:</label>
-        <input type="hidden" id="slug" name="slug">
-        <button type="submit">Guardar</button>
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="mx-auto col-lg-6 col-12 p-5">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Nova Categoria</h5>
+
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Categoria:</label>
+                                <input type="text" id="name" class="form-control" name="name" placeholder="Categoria">
+                            </div>
+                            <input type="hidden" id="slug" name="slug">
+                            <button type="submit" class="btn btn-outline-success"> <i
+                                    class="fa-solid fa-plus me-"></i>
+                                <span>Guardar</span> </button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <script src="/assets/js/category.js"></script>
+    <!-- Importando o jQuery e Bootstrap JS a partir da pasta assets-->
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/fontawesome/js/all.min.js"></script>
 
 </body>
 

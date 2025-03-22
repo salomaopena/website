@@ -1,30 +1,33 @@
-
-
 // importar modulos
-//app.js
 const express = require('express');
 const app = express();
 const path = require('path');
+const bodyParser = require("body-parser")
+const { engine } = require('express-handlebars');
 
 
 // Importar rotas
-const categoryRoutes = require('./routes/Routes');
-const commentRoutes = require('./routes/Routes');
-const ratingRoutes = require('./routes/Routes');
+const categoryRoutes = require('./routes/routes');
+const commentRoutes = require('./routes/routes');
+const ratingRoutes = require('./routes/routes');
+
+//Body Parser
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 
-
-app.use(express.json());
-const port = process.env.PORT || 3000;
-
-// Configurar o express para usar o EJS como view engine
-app.set('view engine', 'ejs');
+//definiar o handlebar como engine de layouts
+app.engine('handlebars', engine({
+    defaultLayout: 'main',  // Define "main" como o layout padrão
+    layoutsDir: path.join(__dirname, 'views', 'layouts'), // Diretório dos layouts
+}));
+app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
+
 
 
 // Configurar o express para servir os arquivos estáticos da pasta public
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public','assets')));
 
 //rota para a página principal
 app.use('/category', categoryRoutes);
@@ -33,15 +36,18 @@ app.use('/ratings', ratingRoutes);
 
 //rota para a página de notícias
 
-// app.get('/', (req, res) => {
-//     res.render('index', {
-//         title: 'News App',
-//         message: 'Welcome to the News App!'
-//     });
-// });
+app.get('/', (req, res) => {
+    res.render('index', {
+        title: 'News App',
+        message: 'Welcome to the News App!'
+    });
+});
 
 
 
+
+//servidor
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`O servidor está rodando na porta: ${port}`);
 });

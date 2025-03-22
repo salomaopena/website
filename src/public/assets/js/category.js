@@ -26,7 +26,7 @@ document.querySelector('form').addEventListener('submit', function (event) {
         .then(data => {
             console.log(data);
             alert('Categoria inserida com sucesso!');
-            document.querySelector('form').reload();
+            document.querySelector('form').reset();
 
         })
         .catch(error => {

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha aplicação Node.js</title>
+
+  <!-- Importando o Bootstrap CSS a partir da pasta assets-->
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css/app.css">
+
+  <!-- fontawosome-->
+  <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
+
+  <!-- font google-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Cabeçalho -->
+
+  <header class="sticky-top border-bottom-header">
+    <nav class="navbar navbar-expand-lg bg-dark text-light" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <i class="fa-brands fa-node fa-3x text-warning"></i>
+        </a>
+        <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon text-light"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">Notícias</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">Contato</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  </header>
+
+  <!-- Fim Cabeçalho-->
+
+  <!-- Início do menu Lateral esquerdo-->
+  <section class="d-flex">
+    <div class="row flex-nowrap container-fluid">
+      <div class="bg-dark col-auto col-md-4 col-lg-2 min-vh-100 d-flex flex-column">
+        <a href="#" class="d-flex text-decoration-none align-items-center ms-2 my-3">
+          <span class="text-light fs-4 d-none d-sm-inline">
+            Menu Principal
+          </span>
+        </a>
+
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a href="#" class="nav-link text-light active" aria-current="page">
+              <i class="fas fa-home me-2"></i>
+              <span class="d-none d-sm-inline">Home</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link text-light">
+              <i class="fas fa-users me-2"></i>
+              <span class="d-none d-sm-inline">Usuários</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link text-light">
+              <i class="fa-solid fa-list me-2"></i>
+              <span class="d-none d-sm-inline">Categoria</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link text-light">
+              <i class="fas fa-newspaper me-2"></i>
+              <span class="d-none d-sm-inline">Notícias</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link text-light">
+              <i class="fa-solid fa-right-from-bracket me-2"></i>
+              <span class="d-none d-sm-inline">Sair</span>
+            </a>
+          </li>
+        </ul>
+
+      </div><!--fim do menu lateral esquerdo-->
+
+
+      <!-- Início do conteúdo principal-->
+      <div class="bg-light-subtle content-box flex-fill container-fluid">
+
+        <div class="row mb-5">
+          <div class="col-md-12">
+            <h1 class="text-justify my-3">Bem-vindo ao sistema</h1>
+          </div>
+
+          <div class="col-sm col-12">
+            <div class="card"><!--card 1-->
+              <div class="card-header">
+                <h2>Últimas Notícias</h2>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="card">
+                      <img src="/assets/img/news1.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Notícia 1</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod
+                          voluptates. Quisquam, quod voluptates.</p>
+                        <a href="#" class="btn btn-outline-warning">Leia mais</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card">
+                      <img src="/assets/img/news1.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Notícia 1</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod
+                          voluptates. Quisquam, quod voluptates.</p>
+                        <a href="#" class="btn btn-outline-warning">Leia mais</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card">
+                      <img src="/assets/img/news1.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Notícia 1</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod
+                          voluptates. Quisquam, quod voluptates.</p>
+                        <a href="#" class="btn btn-outline-warning">Leia mais</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!--end card 1-->
+
+          </div>
+
+
+        </div>
+
+        <div class="col-sm col-12">
+          <div class="card"> <!--card 2-->
+            <div class="card-header">
+              <h2>Últimas Notícias</h2>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card">
+                    <img src="/assets/img/news1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Notícia 1</h5>
+                      <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod
+                        voluptates. Quisquam, quod voluptates.</p>
+                      <a href="#" class="btn btn-outline-warning">Leia mais</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <img src="/assets/img/news1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Notícia 1</h5>
+                      <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod
+                        voluptates. Quisquam, quod voluptates.</p>
+                      <a href="#" class="btn btn-outline-warning">Leia mais</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <img src="/assets/img/news1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Notícia 1</h5>
+                      <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod
+                        voluptates. Quisquam, quod voluptates.</p>
+                      <a href="#" class="btn btn-outline-warning">Leia mais</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> <!--end card 2-->
+        </div>
+
+        <!--fim do conteúdo principal-->
+      </div>
+
+  </section>
+
+
+
+  <!--início do rodapé-->
+  <footer class="container-fluid bg-dark py-3 sticky-md-bottom border-bottom-footer text-light">
+
+    <div class="row text-center justify-content-center">
+
+      <div class="col-md-6">
+        <p><i class="fa-brands fa-node fa-2x"></i> Copyright &copy; 2021 - Node.js. Todos os direitos
+          reservados.</p>
+      </div>
+      <div class="socila-icons col-md-6">
+        <a href="#"><i class="fab fa-facebook text-light"></i></a>
+        <a href="#"><i class="fab fa-twitter text-light"></i></a>
+        <a href="#"><i class="fab fa-instagram text-light"></i></a>
+        <a href="#"><i class="fab fa-github text-light"></i></a>
+      </div>
+    </div>
+  </footer>
+  <!--fim do rodapé-->
+
+
+
+  <!-- Importando o jQuery e Bootstrap JS a partir da pasta assets-->
+  <script src="/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/js/app.js"></script>
+  <script src="/assets/fontawesome/js/all.min.js"></script>
+
+</body>
+
+</html>

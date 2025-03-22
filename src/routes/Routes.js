@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Importar controllers
-const categoryController = require('../controllers/CategoryController');
+const categoryController = require('../controllers/categoryController');
 const commentController = require('../controllers/CommentController');
 const ratingController = require('../controllers/RatingController');
 

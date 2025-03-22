@@ -1,4 +1,5 @@
 const db = require('../config/dbconfig');
+const Category = require('../models/categoy');
 
 // Listar todas as categorias
 
@@ -20,7 +21,7 @@ exports.list = (req, res) => {
 
 exports.add = (req, res) => {
     const { name, slug} = req.body;
-    db.query('INSERT INTO categories (name, slug) VALUES (?, ?)', [ name, slug ], (err, result) => {
+    Category.add({ name, slug }, (err, result) => {
         if (err) {
             return res.status(500).json({
                 message: 'Falha ao inserir a categoria no banco de dados: ' + err
