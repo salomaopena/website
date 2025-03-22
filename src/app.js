@@ -38,8 +38,7 @@ app.use('/ratings', ratingRoutes);
 
 app.get('/', (req, res) => {
     res.render('index', {
-        title: 'News App',
-        message: 'Welcome to the News App!'
+        currentDate: new Date(),
     });
 });
 
