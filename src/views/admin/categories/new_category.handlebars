@@ -1,0 +1,25 @@
+<div class="d-flex">
+    <div class="row flex-nowrap container-fluid">
+
+        <!--menu navbar-->
+        {{> _navbar }}
+
+
+        <!--main content -->
+         <div class="bg-light-subtle content-box flex-fill container-fluid">
+
+             <div class="mb-3">
+                <span class="content-title">
+                    {{>page_title}}
+                </span>
+            </div>
+            <hr>
+
+            <div class="mb-3 alert alert-danger" role="alert">
+                {{message}}
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,17 +1,30 @@
 const db = require('../config/dbconfig');
-const Category = require('../models/categoy');
+const Category = require('../models/category');
 
-// Listar todas as categorias
 
-exports.list = (req, res) => {
-    db.query('SELECT * FROM categories', (err, results) => {
+exports.findAll = (req, res) => {
+    Category.findAll((err, results) => {
         if (err) {
-            return res.status(500).json({
-                message: 'Falha ao obter as categorias do banco de dados: ' + err
+            return res.status(500).render('admin/categories/list_category', {
+                title: 'Lista de categorias',
+                message: 'Erro no servidor',
+                error: err
             });
-        } else {
-            res.json(results);
         }
+
+        if (!results || results.length === 0) {
+            return res.status(404).render('admin/categories/list_category',
+                {
+                    title: 'Lista de categorias',
+                    message: 'Nenhuma categoria encontrada '
+                });
+        }
+
+        return res.status(200).render('admin/categories/list_category', {
+            title: 'Lista de categorias',
+            categories: results,
+            /*user: req.session.user*/
+        }); // Enviar resposta com os dados
     });
 };
 
@@ -19,18 +32,26 @@ exports.list = (req, res) => {
 
 // Criar uma nova categoria
 
+exports.new = (req)
+
 exports.add = (req, res) => {
-    const { name, slug} = req.body;
+    const { name, slug } = req.body;
     Category.add({ name, slug }, (err, result) => {
         if (err) {
-            return res.status(500).json({
-                message: 'Falha ao inserir a categoria no banco de dados: ' + err
-            });
+            return res.status(500).render("admin/categories/new_category",
+                {
+                    title: 'Adicionar categoria',
+                    message: 'Falha ao inserir a categoria no banco de dados: ' + err
+                }
+            );
         } else {
-            res.status(200).json({
-                message: 'Categoria criada com sucesso!',
-                id: result.insertId
-            });
+            res.status(200).render( "admin/categories/new_category",
+                {
+                    title: 'Adicionar categoria',
+                    message: 'Categoria criada com sucesso!',
+                    id: result.insertId
+                }
+            );
         }
     });
 };

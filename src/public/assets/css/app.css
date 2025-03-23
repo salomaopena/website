@@ -84,6 +84,13 @@ body{
   width: 100%;
 }
 
+.content-title{
+  font-weight:bold;
+  font-size: 1.5rem;
+  margin-top: 20px;
+  color: #880000;
+}
+
 
 .text-justify {
   text-align: justify;

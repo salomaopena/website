@@ -11,7 +11,7 @@ const authMiddleware = require('../middlewares/AuthMiddleware');
 
 
 // Rotas para categorias
-router.get('/list', categoryController.list);
+//router.get('/list', categoryController.list);
 router.post('/add', /*authMiddleware,*/ categoryController.add);
 //router.get('/categories/:categoryId', categoryController.getCategoryById);
 //router.put('/categories/:categoryId', categoryController.updateCategory);

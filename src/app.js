@@ -3,7 +3,10 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require("body-parser")
+const session = require('express-session');
+const bcrypt = require('bcryptjs');
 const { engine } = require('express-handlebars');
+const admin = require("./routes/admin")
 
 
 // Importar rotas
@@ -13,7 +16,7 @@ const ratingRoutes = require('./routes/routes');
 
 //Body Parser
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(express.json())
 
 
 //definiar o handlebar como engine de layouts
@@ -26,13 +29,29 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 
-// Configurar o express para servir os arquivos estáticos da pasta public
+// Configurar o express para servir os arquivos estáticos da pasta public middleware
 app.use(express.static(path.join(__dirname, 'public')));
 
-//rota para a página principal
-app.use('/category', categoryRoutes);
-app.use('/comments', commentRoutes);
-app.use('/ratings', ratingRoutes);
+
+// Configuração da Sessão
+app.use(session({
+    secret: 'MinhaChave',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false, maxAge: 60000 * 60 } // 1 hora
+  }));
+  
+  // Middleware para verificar se o usuário está autenticado
+  const checkAuth = (req, res, next) => {
+    if (!req.session.user) {
+      return res.redirect('/login');
+    }
+    next();
+  };
+
+//condifurações de rotas
+app.use('/admin',admin);
+
 
 //rota para a página de notícias
 
