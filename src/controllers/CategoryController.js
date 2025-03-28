@@ -32,7 +32,12 @@ exports.findAll = (req, res) => {
 
 // Criar uma nova categoria
 
-exports.new = (req)
+exports.new = (req, res) =>{
+    return res.status(200).render("admin/categories/new_category",{
+        title: "Adicionar categoria",
+    });
+};
+
 
 exports.add = (req, res) => {
     const { name, slug } = req.body;
@@ -41,11 +46,11 @@ exports.add = (req, res) => {
             return res.status(500).render("admin/categories/new_category",
                 {
                     title: 'Adicionar categoria',
-                    message: 'Falha ao inserir a categoria no banco de dados: ' + err
+                    error: 'Falha ao adicionar '+err
                 }
             );
         } else {
-            res.status(200).render( "admin/categories/new_category",
+            res.status(200).render("admin/categories/new_category",
                 {
                     title: 'Adicionar categoria',
                     message: 'Categoria criada com sucesso!',
@@ -59,18 +64,40 @@ exports.add = (req, res) => {
 
 // Atualizar uma categoria
 
-exports.update = (req, res) => {
+exports.update = (req, res)=>{
     const id = req.params.id;
-    const { name, slug } = req.body;
-    db.query('UPDATE categories SET name = ?, slug = ? WHERE id = ?', [name, slug, id], (err, result) => {
+    Category.findById(id,(err, results)=>{
+        if(err){
+            return res.status(500).render('admin/categories/list_category',{
+                title: 'Atualizar categoria',
+                error: err
+            })
+        }else{
+            console.log(results[0])
+            return res.status(200).render('admin/categories/update_category',{
+                title: 'Atualizar categoria',
+                category: results[0]
+            });
+        }
+    });
+};
+
+exports.edit = (req, res) => {
+    const id = req.body.id;
+    const {name, slug } = req.body;
+    Category.update(id, {name, slug}, (err, result) => {
         if (err) {
-            return res.status(500).json({
-                message: 'Falha ao atualizar a categoria no banco de dados: ' + err
+            return res.status(500).render('admin/categories/update_category',{
+                title: 'Adicionar categoria',
+                error: 'Falha ao atualizar a categoria no banco de dados: ' + err
             });
         } else {
-            res.status(200).json({
-                message: 'Categoria atualizada com sucesso!',
-                result: result
+            Category.findAll((err, results) => {
+                return res.status(200).render('admin/categories/list_category', {
+                    title: 'Lista de categorias',
+                    success: "Catgoria atualizada com sucesso!",
+                    categories: results,
+                }); 
             });
         }
     });

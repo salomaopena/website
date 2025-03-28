@@ -24,6 +24,11 @@
             <div class="col-xxl col-12">
 
                 <div class="container-fluid mt-4 py-4">
+
+                    
+ 
+                    
+
                     {{#if categories.length}}
 
                     {{#each categories}}
@@ -32,12 +37,13 @@
                             <tr>
                                 <th scope="row">
                                     <div class="align-items-center">
-                                        {{ this.name }} 
+                                        {{ this.name }}
                                     </div>
                                 </th>
                                 <th>
                                     <div class="text-end align-items-center">
-                                        <a href="#" class="btn btn-outline-secondary px-3 m-1">
+                                        <a href="/admin/category/update/{{this.id}}"
+                                            class="btn btn-outline-secondary px-3 m-1">
                                             <i class="fa-regular fa-pen-to-square me-2"></i>
                                         </a>
                                         <a href="#" class="btn btn-outline-danger px-3 m-1">
@@ -48,14 +54,17 @@
                                         </a>
                                     </div>
                                 </th>
-                                
+
                             </tr>
                         </table>
                     </div>
                     {{/each}}
 
                     {{else}}
-                    <p class="text-muted">{{message}}</p>
+                    <div class="mb-3 alert alert-danger" role="alert">
+                        <h4 class="text-muted">{{message}} Clique <a href="/admin/category/new"
+                                class="link-none-decoration">aqui</a> para adicionar</h4>
+                    </div>
                     {{/if}}
                 </div>
 
