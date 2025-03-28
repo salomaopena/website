@@ -1,5 +1,5 @@
 const db = require('../config/dbconfig');
-const Category = require('../models/category');
+const Category = require('../models/categoryModel');
 
 
 exports.findAll = (req, res) => {
