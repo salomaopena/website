@@ -1,40 +1,38 @@
-// Rota para registro de usuário
-app.post('/register', async (req, res) => {
-    const { name, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
+// models/userModel.js
+const pool = require('../config/db');
+const bcrypt = require('bcryptjs');
 
-    db.query('INSERT INTO users (name, email, passwd) VALUES (?, ?, ?)', [name, email, hashedPassword], (err) => {
-      if (err) return res.status(500).send('Erro ao registrar usuário.');
-      res.redirect('/login');
-    });
-  });
-  
-  // Rota para login
-  app.post('/login', (req, res) => {
-    const { email, password } = req.body;
-  
-    db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
-      if (err || results.length === 0) return res.status(401).send('Usuário não encontrado.');
-  
-      const user = results[0];
-      const validPassword = await bcrypt.compare(password, user.passwd);
-      
-      if (!validPassword) return res.status(401).send('Senha inválida.');
-  
-      req.session.user = { id: user.id, name: user.name, role: user.role };
-      res.redirect('/dashboard');
-    });
-  });
-  
-  // Rota para logout
-  app.get('/logout', (req, res) => {
-    req.session.destroy(() => {
-      res.redirect('/login');
-    });
-  });
-  
-  // Rota protegida
-  app.get('/dashboard', checkAuth, (req, res) => {
-    res.render('dashboard', { user: req.session.user });
-  });
-  
+const User = {
+    getAll: async () => {
+        const [rows] = await pool.query('SELECT * FROM users WHERE deleted_at IS NULL');
+        return rows;
+    },
+    getById: async (id) => {
+        const [rows] = await pool.query('SELECT * FROM users WHERE id = ? AND deleted_at IS NULL', [id]);
+        return rows[0];
+    },
+    getByEmail: async (email) => {
+        const [rows] = await pool.query('SELECT * FROM users WHERE email = ? AND deleted_at IS NULL', [email]);
+        return rows[0];
+    },
+    create: async (first_name, last_name, email, senha) => {
+        const hashedPassword = await bcrypt.hash(senha, 10);
+        const [result] = await pool.query('INSERT INTO users (first_name, last_name, email, senha) VALUES (?, ?, ?, ?)', [first_name, last_name, email, hashedPassword]);
+        return result.insertId;
+    },
+    update: async (id, first_name, last_name, email) => {
+        const [result] = await pool.query('UPDATE users SET first_name = ?, last_name = ?, email = ? WHERE id = ? AND deleted_at IS NULL', [first_name, last_name, email, id]);
+        return result.affectedRows;
+    },
+    updatePassword: async (id, newPassword) => {
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        const [result] = await pool.query('UPDATE users SET senha = ? WHERE id = ? AND deleted_at IS NULL', [hashedPassword, id]);
+        return result.affectedRows;
+    },
+    delete: async (id) => {
+        const [result] = await pool.query('UPDATE users SET deleted_at = NOW() WHERE id = ?', [id]);
+        return result.affectedRows;
+    }
+};
+
+module.exports = User;
