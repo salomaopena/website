@@ -18,6 +18,8 @@
   "license": "GPL-GNU",
   "description": "",
   "dependencies": {
+    "axios": "^1.8.4",
+    "badge-maker": "^4.1.0",
     "bcryptjs": "^3.0.2",
     "body-parser": "^1.20.3",
     "cookie-parser": "^1.4.7",
