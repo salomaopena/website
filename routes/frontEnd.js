@@ -12,16 +12,15 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => res.render('index'));
-router.get('/login', (req, res) => res.render('login'));
-router.get('/register', (req, res) => res.render('register'));
+router.get('/login', (req, res) => res.render('admin/auth/login'));
+router.get('/register', (req, res) => res.render('admin/auth/register'));
 router.get('/reset-password', (req, res) => res.render('reset-password'));
-router.get('/admin', (req, res) => res.render('admin/index'));
 
-router.get("/dashboard",verificarSessao,(req, res) => {
+router.get("/admin",verificarSessao,(req, res) => {
     if (!req.session.user) {
         return res.redirect("/login");
     }
-    res.render("dashboard", { user: req.session.user });
+    res.render("admin/dashboard", { user: req.session.user });
 });
 
 
