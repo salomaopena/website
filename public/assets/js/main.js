@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 showAlert(result.message, "success");
                 setTimeout(() => {
-                    window.location.href = "/dashboard";
+                    window.location.href = "/admin";
                 }, 2000);
             }
         });
@@ -27,16 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const first_name = document.getElementById('first_name').value;
             const last_name = document.getElementById('last_name').value;
             const email = document.getElementById('email').value;
-            const senha = document.getElementById('password').value;
+            const passwd = document.getElementById('password').value;
 
-            const result = await registerUser(first_name, last_name, email, senha);
+            const result = await registerUser(first_name, last_name, email, passwd);
             
             if (result.error) {
                 showAlert(result.error, "error");
             } else {
                 showAlert(result.message, "success");
                 setTimeout(() => {
-                    window.location.href = "/dashboard";
+                    window.location.href = "/admin";
                 }, 2000);
             }
         });

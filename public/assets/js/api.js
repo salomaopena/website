@@ -6,18 +6,18 @@ const api = axios.create({
     headers: { 'Content-Type': 'application/json' }
 });
 
-async function loginUser(email, senha) {
+async function loginUser(email, passwd) {
     try {
-        const response = await api.post('/login', { email, senha }, { withCredentials: true });
+        const response = await api.post('/login', { email, passwd }, { withCredentials: true });
         return response.data;
     } catch (error) {
         return { error: error.response.data.message };
     }
 }
 
-async function registerUser(first_name, last_name, email, senha) {
+async function registerUser(first_name, last_name, email, passwd) {
     try {
-        const response = await api.post('/register', { first_name, last_name, email, senha });
+        const response = await api.post('/register', { first_name, last_name, email, passwd });
         return response.data;
     } catch (error) {
         return { error: error.response.data.message };

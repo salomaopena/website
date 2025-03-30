@@ -15,18 +15,18 @@ const User = {
         const [rows] = await pool.query('SELECT * FROM users WHERE email = ? AND deleted_at IS NULL', [email]);
         return rows[0];
     },
-    create: async (first_name, last_name, email, senha) => {
-        const hashedPassword = await bcrypt.hash(senha, 10);
-        const [result] = await pool.query('INSERT INTO users (first_name, last_name, email, senha) VALUES (?, ?, ?, ?)', [first_name, last_name, email, hashedPassword]);
+    create: async (first_name, last_name, email, password) => {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const [result] = await pool.query('INSERT INTO users (first_name, last_name, email, passwd) VALUES (?, ?, ?, ?)', [first_name, last_name, email, hashedPassword]);
         return result.insertId;
     },
-    update: async (id, first_name, last_name, email) => {
-        const [result] = await pool.query('UPDATE users SET first_name = ?, last_name = ?, email = ? WHERE id = ? AND deleted_at IS NULL', [first_name, last_name, email, id]);
+    update: async (id, first_name, last_name, email,role) => {
+        const [result] = await pool.query('UPDATE users SET first_name = ?, last_name = ?, email = ?, role = ? WHERE id = ? AND deleted_at IS NULL', [first_name, last_name, email, role, id]);
         return result.affectedRows;
     },
     updatePassword: async (id, newPassword) => {
         const hashedPassword = await bcrypt.hash(newPassword, 10);
-        const [result] = await pool.query('UPDATE users SET senha = ? WHERE id = ? AND deleted_at IS NULL', [hashedPassword, id]);
+        const [result] = await pool.query('UPDATE users SET passwd = ? WHERE id = ? AND deleted_at IS NULL', [hashedPassword, id]);
         return result.affectedRows;
     },
     delete: async (id) => {

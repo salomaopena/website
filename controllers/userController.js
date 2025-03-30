@@ -36,12 +36,12 @@ const userController = {
     },
     createUser: async (req, res) => {
         try {
-            const { first_name, last_name, email, senha } = req.body;
+            const { first_name, last_name, email, passwd } = req.body;
             const existingUser = await User.getByEmail(email);
             if (existingUser) {
                 return res.status(400).json({ status: 400, message: 'E-mail já cadastrado' });
             }
-            const id = await User.create(first_name, last_name, email, senha);
+            const id = await User.create(first_name, last_name, email, passwd);
             res.status(200).json({ status: 200, message: 'Usuário criado com sucesso', id, first_name, last_name, email });
         } catch (error) {
             res.status(500).json({ status: 500, message: 'Erro ao criar usuário ', error: error });
@@ -127,9 +127,9 @@ const userController = {
 
     login: async (req, res) => {
         try {
-            const { email, senha } = req.body;
+            const { email, passwd } = req.body;
             const user = await User.getByEmail(email);
-            if (!user || !(await bcrypt.compare(senha, user.senha))) {
+            if (!user || !(await bcrypt.compare(passwd, user.passwd))) {
                 return res.status(400).json({ status: 400, message: 'Credenciais inválidas' });
             }
             const token = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: '1h' });
