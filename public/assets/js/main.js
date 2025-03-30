@@ -56,6 +56,42 @@ function showAlert(message, type = "success") {
 }
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: "Tem certeza?",
+                text: "Você será desconectado do sistema.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Sim, sair!",
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch("/api/logout")
+                        .then(response => response.json())
+                        .then(data => {
+                            Swal.fire("Até logo!", data.message, "success");
+                            setTimeout(() => {
+                                window.location.href = "/login";
+                            }, 1500);
+                        })
+                        .catch(error => Swal.fire("Erro!", "Não foi possível encerrar a sessão", "error"));
+                }
+            });
+        });
+    }
+});
+
+
+
+
 function confirmDelete(itemId) {
     Swal.fire({
         title: "Tem certeza?",

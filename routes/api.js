@@ -19,6 +19,7 @@ router.put('/reset-password', userController.resetPassword);
 router.post('/reset-password-request', userController.resetPasswordRequest);
 //router.delete('/:id', authMiddleware, userController.deleteUser);
 router.put('/delete/:id', userController.deleteUser);
+router.get("/logout", userController.logout);
 
 
 
