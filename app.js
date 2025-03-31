@@ -45,7 +45,10 @@ app.use(express.urlencoded({ extended: true })); // Para suportar form-urlencode
 app.use(cookieParser());            // Middleware para habilitar cookies
 
 // Rotas
-app.use('/',frontEnd);
+//app.use('/',frontEnd);
+app.get('/',(req,res)=>{
+    res.send('Ola Nodejs');
+});
 app.use('/api', api);
 
 // Servidor

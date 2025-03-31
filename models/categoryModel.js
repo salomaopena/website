@@ -1,28 +1,37 @@
-const db = require('../config/dbconfig');
+const pool = require('../config/db');
 
-class Category{
+const Category = {
 
-static findAll(callback){
-    db.query('SELECT * FROM categories WHERE deleted_at IS NULL', callback);
+    getAll: async () => {
+        const [rows] = await pool.query('SELECT * FROM categories WHERE deleted_at IS NULL');
+        return rows;
+    },
+
+    getById: async (id) => {
+        const [rows] = await pool.query('SELECT * FROM categories WHERE deleted_at IS NULL AND id = ?', [id]);
+        return rows[0];
+    },
+
+    getByName: async (name) => {
+        const [rows] = await pool.query('SELECT * FROM categories WHERE deleted_at IS NULL AND name = ?', [name]);
+        return rows[0];
+    },
+
+    create: async (name, slug) => {
+        const [result] = await pool.query('INSERT INTO categories (name, slug) VALUES (?, ?)', [name, slug]);
+        return result.insertId;
+    },
+
+    update: async (id, name, slug) => {
+        const [result] = await pool.query('UPDATE categories SET name = ?, slug = ? WHERE id = ?', [name, slug, id]);
+        return result.affectedRows
+    },
+
+    delete: async (id) => {
+        const [result] = await pool.query('UPDATE categories SET deleted_at = NOW() WHERE id = ?', [id]);
+        return result.affectedRows;
+    }
+
 };
-
-static findById(id, callback){
-    db.query('SELECT * FROM categories WHERE deleted_at IS NULL AND id = ?', [id], callback);
-};
-
-static add({ name, slug }, callback){
-    return db.query('INSERT INTO categories (name, slug) VALUES (?, ?)', [name, slug], callback);
-};
-
-static update(id, { name, slug }, callback){
-    return db.query('UPDATE categories SET name = ?, slug = ? WHERE id = ?', [name, slug, id], callback);
-};
-
-
-static delete(id, callback){
-    db.query('UPDATE categories SET deleted_at = NOW() WHERE id = ?', [id], callback);
-};
-
-}
 
 module.exports = Category
