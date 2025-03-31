@@ -1,124 +1,67 @@
-const db = require('../config/dbconfig');
+const { create } = require('express-handlebars');
 const Category = require('../models/categoryModel');
 
 
-exports.findAll = (req, res) => {
-    Category.findAll((err, results) => {
-        if (err) {
-            return res.status(500).render('admin/categories/list_category', {
-                title: 'Lista de categorias',
-                message: 'Erro no servidor',
-                error: err
-            });
+const categoryController = {
+    findAll: async (req, res) => {
+        try {
+            const categories = await Category.getAll();
+            res.status(200).json({ status: 200, message: "success", categories: categories });
+        } catch (error) {
+            res.status(500).json({ status: 500, message: 'Erro ao buscar categorias ' + error });
         }
+    },
 
-        if (!results || results.length === 0) {
-            return res.status(404).render('admin/categories/list_category',
-                {
-                    title: 'Lista de categorias',
-                    message: 'Nenhuma categoria encontrada '
-                });
+    findById: async (req, res) => {
+        try {
+            const category = await Category.getById(req.params.id);
+            category ? res.status(200).json({ status: 200, message: "Categoria encontrada", category: category }) :
+                res.status(404).json({ status: 404, message: "Categoria não encontrado." });
+        } catch (error) {
+            res.status(500).json({ status: 500, message: 'Erro ao buscar categoria', error });
         }
+    },
 
-        return res.status(200).render('admin/categories/list_category', {
-            title: 'Lista de categorias',
-            categories: results,
-            /*user: req.session.user*/
-        }); // Enviar resposta com os dados
-    });
+    createCategoty: async (req, res) => {
+        try {
+            const { name, slug } = req.body;
+            const existeCategoria = await Category.getByName(name);
+            if (existeCategoria) {
+                return res.status(400).json({ status: 400, message: 'Categoria já cadastrada' });
+            }
+            const id = await Category.create(name, slug);
+            res.status(200).json({ status: 200, message: 'Categoria criada com sucesso', id, name, slug });
+        } catch (error) {
+            res.status(500).json({ status: 500, message: 'Erro ao criar usuário ', error: error });
+        }
+    },
+
+    updateCategory: async (req, res) => {
+        try {
+            const { name, slug} = req.body;
+            const result = await Category.update(req.params.id, name, slug);
+            if (result) {
+                res.status(200).json({ status: 200, message: 'Categoria atualizada com sucesso' });
+            } else {
+                res.status(400).json({ status: 400, message: 'Categoria não encontrada ou nenhuma alteração feita' });
+            }
+        } catch (error) {
+            res.status(500).json({ status: 500, message: 'Erro ao atualizar a categoria ', error });
+        }
+    },
+
+    deleteCategory: async (req, res) => {
+        try {
+            const result = await Category.delete(req.params.id);
+            if (result) {
+                res.status(200).json({ status: 200, message: 'Categoria excluída com sucesso' });
+            } else {
+                res.status(400).json({ status: 400, message: 'Categoria não encontrada' });
+            }
+        } catch (error) {
+            res.status(500).json({ status: 500, message: 'Erro ao excluir categoria ', error });
+        }
+    }
 };
 
-
-
-// Criar uma nova categoria
-
-exports.new = (req, res) =>{
-    return res.status(200).render("admin/categories/new_category",{
-        title: "Adicionar categoria",
-    });
-};
-
-
-exports.add = (req, res) => {
-    const { name, slug } = req.body;
-    Category.add({ name, slug }, (err, result) => {
-        if (err) {
-            return res.status(500).render("admin/categories/new_category",
-                {
-                    title: 'Adicionar categoria',
-                    error: 'Falha ao adicionar '+err
-                }
-            );
-        } else {
-            res.status(200).render("admin/categories/new_category",
-                {
-                    title: 'Adicionar categoria',
-                    message: 'Categoria criada com sucesso!',
-                    id: result.insertId
-                }
-            );
-        }
-    });
-};
-
-
-// Atualizar uma categoria
-
-exports.update = (req, res)=>{
-    const id = req.params.id;
-    Category.findById(id,(err, results)=>{
-        if(err){
-            return res.status(500).render('admin/categories/list_category',{
-                title: 'Atualizar categoria',
-                error: err
-            })
-        }else{
-            console.log(results[0])
-            return res.status(200).render('admin/categories/update_category',{
-                title: 'Atualizar categoria',
-                category: results[0]
-            });
-        }
-    });
-};
-
-exports.edit = (req, res) => {
-    const id = req.body.id;
-    const {name, slug } = req.body;
-    Category.update(id, {name, slug}, (err, result) => {
-        if (err) {
-            return res.status(500).render('admin/categories/update_category',{
-                title: 'Adicionar categoria',
-                error: 'Falha ao atualizar a categoria no banco de dados: ' + err
-            });
-        } else {
-            Category.findAll((err, results) => {
-                return res.status(200).render('admin/categories/list_category', {
-                    title: 'Lista de categorias',
-                    success: "Catgoria atualizada com sucesso!",
-                    categories: results,
-                }); 
-            });
-        }
-    });
-}
-
-
-// Excluir uma categoria
-
-exports.delete = (req, res) => {
-    const id = req.params.id;
-    const deleted_at = new Date();
-    db.query('UPDATE categories SET deleted_at = ? WHERE id = ?', [deleted_at, id], (err, result) => {
-        if (err) {
-            return res.status(500).json({
-                message: 'Falha ao deletar a categoria do banco de dados: ' + err
-            });
-        } else {
-            res.status(200).json({
-                message: 'Categoria deletada com sucesso!',
-                result: result
-            });
-        }
-    });
-};
+module.exports = categoryController;
