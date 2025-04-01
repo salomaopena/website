@@ -5,10 +5,10 @@
 * [Título e Imagem de capa](#Título-e-Imagem-de-capa)
 * [Badges](#badges)
 
-![Last modified](https://img.shields.io/aur/last-modified/:packageName)
+![Last modified](https://img.shields.io/aur/last-modified/:website)
 ![Em Desenvolvimento](http://img.shields.io/static/v1?label=Status&message=Em%20Desenovolvimento&color=GREEN&style=for-the-badge)
 ![GitHub stars](https://img.shields.io/github/stars/salomaopena?style=social)
-![Gitea Last Commit](https://img.shields.io/gitea/last-commit/:user/:repo)
+![Gitea Last Commit](https://img.shields.io/gitea/last-commit/:salomaopena/:website)
 
 * [Índice](#índice)
 * [Descrição do Projeto](#descrição-do-projeto)
