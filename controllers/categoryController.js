@@ -1,4 +1,3 @@
-const { create } = require('express-handlebars');
 const Category = require('../models/categoryModel');
 
 
