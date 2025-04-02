@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const passwd = document.getElementById('password').value;
 
             const result = await registerUser(first_name, last_name, email, passwd);
-            
+
             if (result.error) {
                 showAlert(result.error, "error");
             } else {
@@ -104,6 +104,60 @@ function confirmDelete(itemId) {
         if (result.isConfirmed) {
             deleteItem(itemId); // Função que remove o item do banco de dados
             showAlert("Item excluído com sucesso!", "success");
+        }
+    });
+}
+
+
+/************************************************************************ */
+/** CATEGORIA*/
+/**************************************************************************/
+async function loadCategories() {
+    const categories = await fetchCategory();
+    const categoryTable = document.getElementById("categoryTableBody");
+
+    categoryTable.innerHTML = ""; // Limpa a tabela antes de renderizar
+
+    categories.forEach(category => {
+        const row = `<tr>
+                        <td>${category.id}</td>
+                        <td>${category.name} </td>
+                        <td class="justify-content-end">
+                            <button class="btn btn-warning btn-sm" onclick="editCategory(${category.id}, '${category.name}', '${category.slug}')">
+                                <i class="fa fa-edit"></i> Editar
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteCategory(${category.id})">
+                                <i class="fa fa-trash"></i> Excluir
+                            </button>
+                        </td>
+                    </tr>`;
+        categoryTable.innerHTML += row;
+    });
+}
+
+// Carregar usuários assim que a página for carregada
+document.addEventListener("DOMContentLoaded", loadCategories);
+
+
+async function deleteCategory(id) {
+    Swal.fire({
+        title: "Tem certeza?",
+        text: "Esta ação não pode ser desfeita!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Sim, excluir!",
+        cancelButtonText: "Cancelar"
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            try {
+                await api.put(`/categories/delete/${id}`);
+                Swal.fire("Excluído!", "A categoria foi removida com sucesso.", "success");
+                loadCategories();
+            } catch (error) {
+                Swal.fire("Erro!", "Não foi possível excluir o usuário.", "error");
+            }
         }
     });
 }

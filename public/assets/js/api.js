@@ -6,6 +6,26 @@ const api = axios.create({
     headers: { 'Content-Type': 'application/json' }
 });
 
+async function registerCategory(name, slug) {
+    try {
+        const response = await api.post('/categories/add', { name, slug });
+        return response.data;
+    } catch (error) {
+        return { error: error.response.data.message };
+    }
+}
+
+async function fetchCategory() {
+    try {
+        const response = await api.get('/categories'); // retornar lista de categoria
+        return response.data.categories; // Retorna apenas a lista
+    } catch (error) {
+        console.error("Erro ao buscar categoria:", error);
+        return []; // Retorna array vazio em caso de erro
+    }
+}
+
+
 async function loginUser(email, passwd) {
     try {
         const response = await api.post('/login', { email, passwd }, { withCredentials: true });
@@ -23,3 +43,6 @@ async function registerUser(first_name, last_name, email, passwd) {
         return { error: error.response.data.message };
     }
 }
+
+
+

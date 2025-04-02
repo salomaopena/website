@@ -1,0 +1,55 @@
+<!--menu navbar-->
+{{> navbar }}
+
+
+<!--main content -->
+<div class="content mt-5" id="content">
+    <div class="mb-3">
+        <span class="content-title">
+            {{>page_title}}
+        </span>
+    </div>
+    <hr>
+
+    <div class="mb-3">
+        <a href="/category/new" class="btn btn-outline-primary">
+            <i class="fa-solid fa-plus me-2"></i> Nova categoria
+        </a>
+    </div>
+
+    <div class="col-xxl col-12">
+
+        <div class="container-fluid mt-4 py-4">
+
+
+            {{#if categories.length}}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Categoria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each categories}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.name}}</td>
+                        <td>
+                            <a href="/users/edit/{{this.id}}" class="btn btn-warning btn-sm">Editar</a>
+                            <button class="btn btn-danger btn-sm" onclick="deleteCategory({{this.id}})">Excluir</button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{else}}
+            <div class="mb-3 alert alert-danger" role="alert">
+                <h4 class="text-muted">{{message}} Clique <a href="/category/new" class="link-none-decoration">aqui</a>
+                    para adicionar</h4>
+            </div>
+            {{/if}}
+        </div>
+
+    </div>
+</div>
