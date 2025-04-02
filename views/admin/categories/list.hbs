@@ -12,7 +12,7 @@
     <hr>
 
     <div class="mb-3">
-        <a href="/category/new" class="btn btn-outline-primary">
+        <a href="/admin/categories/new" class="btn btn-outline-primary">
             <i class="fa-solid fa-plus me-2"></i> Nova categoria
         </a>
     </div>
@@ -32,12 +32,25 @@
                 </thead>
                 <tbody>
                     {{#each categories}}
-                    <tr>
-                        <td>{{this.id}}</td>
-                        <td>{{this.name}}</td>
+                    <tr id="category-{{this.id}}">
                         <td>
-                            <a href="/users/edit/{{this.id}}" class="btn btn-warning btn-sm">Editar</a>
-                            <button class="btn btn-danger btn-sm" onclick="deleteCategory({{this.id}})">Excluir</button>
+                            <h5>{{this.id}}</h5>
+                        </td>
+                        <td>
+                           <a href="#" class="text-decoration-none"> <h5>{{this.name}}</h5></a>
+                        </td>
+                        <td class="text-end align-items-center">
+
+                            <a href="/admin/category/update/{{this.id}}" class="btn btn-outline-secondary btn-md px-3 m-1">
+                                <i class="fa-regular fa-pen-to-square me-2"></i>
+                            </a>
+                            <button onclick="deleteCategory({{this.id}})" class="btn btn-outline-danger btn-md px-3 m-1">
+                                <i class="fa-solid fa-cubes-stacked me-2"></i>
+                            </button>
+                            <a href="#" class="btn btn-outline-warning btn-md px-3 m-1">
+                                <i class="fa-solid fa-newspaper me-2"></i>
+                            </a>
+
                         </td>
                     </tr>
                     {{/each}}
@@ -45,7 +58,7 @@
             </table>
             {{else}}
             <div class="mb-3 alert alert-danger" role="alert">
-                <h4 class="text-muted">{{message}} Clique <a href="/category/new" class="link-none-decoration">aqui</a>
+                <h4 class="text-muted">{{message}} Clique <a href="/admin/categories/new" class="link-none-decoration">aqui</a>
                     para adicionar</h4>
             </div>
             {{/if}}
