@@ -17,15 +17,15 @@ app.use(session({
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
-    cookie: { 
+    cookie: {
         secure: false, // Alterar para `true` se usar HTTPS
         httpOnly: true,
         sameSite: "lax"  // Permite compartilhamento de cookies corretamente
-    } 
+    }
 }));
 
 app.use(cors({
-    origin: process.env.BASE_URL+"/api",  // Ajuste conforme sua URL
+    origin: process.env.BASE_URL + "/api",  // Ajuste conforme sua URL
     credentials: true  // Permite envio de cookies
 }));
 
@@ -45,7 +45,7 @@ app.use(express.urlencoded({ extended: true })); // Para suportar form-urlencode
 app.use(cookieParser());            // Middleware para habilitar cookies
 
 // Rotas
-app.use('/',frontEnd);
+app.use('/', frontEnd);
 app.use('/api', api);
 
 // Servidor
@@ -55,6 +55,6 @@ app.listen(PORT, () => {
         author: 'Salomão Pena',
         status: 'Ligado',
         version: 'v 1.0.0',
-        host: 'http://localhost:'+PORT,
+        host: 'http://localhost:' + PORT,
     });
 });
