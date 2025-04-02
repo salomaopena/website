@@ -38,7 +38,7 @@ app.engine('hbs', exphbs.engine({
 }));
 app.set('view engine', 'hbs');
 
-// Middleware
+
 // Middleware
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());            // Para suportar JSON no body

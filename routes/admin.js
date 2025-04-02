@@ -1,13 +1,8 @@
 const express = require('express')
-const User = require('../models/newsModel');
-//const userController = require('../contollers/user_controller');
-//const authMiddleware = require('../middleware/authMiddleware');
 const verificarSessao = require("../middlewares/authMiddleware");
-const dotenv = require('dotenv');
 const axios = require('axios');
-dotenv.config();
 
-const SECRET_KEY = process.env.SECRET_KEY
+
 const API_URL = 'http://localhost:3000/api';
 
 const router = express.Router();
@@ -42,12 +37,7 @@ router.get('/categories', verificarSessao, async (req, res) => {
 });
 
 
-router.get("/categories/new", verificarSessao, (req, res) => {
-    res.render('admin/categories/add', { user: req.session.user, title: 'Nova Categoria' })
-})
-
 router.post("/categories/add", verificarSessao, async(req, res) => {
-    res.render('admin/categories/update')
     try {
         const { name, slug } = req.body;
         const response = await api.post("/categories/add", { name, slug});
@@ -59,10 +49,20 @@ router.post("/categories/add", verificarSessao, async(req, res) => {
 })
 
 
+router.put("/categories/update/:id", verificarSessao, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, slug } = req.body;
 
-router.put("/categories/update/:id", verificarSessao, (req, res) => {
-    res.render('admin/categories/update')
-})
+        const response = await api.put(`/categories/update/${id}`, {name, slug });
+
+        res.status(200).json({ success: true, message: "Categoria atualizado com sucesso!" });
+    } catch (error) {
+        console.error("Erro ao atualizar categoria:", error);
+        res.status(500).json({ success: false, message: "Erro ao atualizar categoria." });
+    }
+});
+
 
 router.put("/categories/delete/:id", verificarSessao, async (req, res) => {
     const { id } = req.params;

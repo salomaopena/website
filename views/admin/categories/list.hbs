@@ -12,9 +12,9 @@
     <hr>
 
     <div class="mb-3">
-        <a href="/admin/categories/new" class="btn btn-outline-primary">
+        <button onclick="openAddUserModal()" class="btn btn-outline-primary">
             <i class="fa-solid fa-plus me-2"></i> Nova categoria
-        </a>
+        </button>
     </div>
 
     <div class="col-xxl col-12">
@@ -37,14 +37,19 @@
                             <h5>{{this.id}}</h5>
                         </td>
                         <td>
-                           <a href="#" class="text-decoration-none"> <h5>{{this.name}}</h5></a>
+                            <a href="#" class="text-decoration-none">
+                                <h5>{{this.name}}</h5>
+                            </a>
                         </td>
                         <td class="text-end align-items-center">
 
-                            <a href="/admin/category/update/{{this.id}}" class="btn btn-outline-secondary btn-md px-3 m-1">
+                            <button onclick="openEditCategoryModal('{{this.id}}', '{{this.name}}', '{{this.slug}}')" 
+                                class="btn btn-outline-secondary btn-md px-3 m-1">
                                 <i class="fa-regular fa-pen-to-square me-2"></i>
-                            </a>
-                            <button onclick="deleteCategory({{this.id}})" class="btn btn-outline-danger btn-md px-3 m-1">
+                            </button >
+
+                            <button onclick="deleteCategory({{this.id}})"
+                                class="btn btn-outline-danger btn-md px-3 m-1">
                                 <i class="fa-solid fa-cubes-stacked me-2"></i>
                             </button>
                             <a href="#" class="btn btn-outline-warning btn-md px-3 m-1">
@@ -58,11 +63,68 @@
             </table>
             {{else}}
             <div class="mb-3 alert alert-danger" role="alert">
-                <h4 class="text-muted">{{message}} Clique <a href="/admin/categories/new" class="link-none-decoration">aqui</a>
+                <h4 class="text-muted">{{message}} Clique <a href="/admin/categories/new"
+                        class="link-none-decoration">aqui</a>
                     para adicionar</h4>
             </div>
             {{/if}}
         </div>
 
+    </div>
+</div>
+
+
+
+
+<!-- Modal de Adicionar categoria -->
+<div id="addCategoryModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Adicionar categoria</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addCategoryForm">
+                    <div class="mb-3">
+                        <label for="name">Categoria</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="hidden" id="slug" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success rounded-pill px-3"> <i
+                            class="fa-solid fa-plus me-"></i> Adicionar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal de Editar Categoria -->
+<div id="editCategoryModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Categoria</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editCategoryForm">
+                    <input type="hidden" id="edit_id"> <!-- ID oculto -->
+                    <div class="mb-3">
+                        <label for="edit_name"></label>
+                        <input type="text" id="edit_name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Slug</label>
+                        <input type="text" id="edit_slug" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Atualizar</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
