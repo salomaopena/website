@@ -28,21 +28,21 @@
     <div class="container">
         <div class="row">
             <div class="mx-auto col-lg-6 col-12 p-5">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
+                <div class="auth-container">
 
-                        <form method="POST" action="/admin/category/add">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Categoria</label>
-                                <input type="text" id="name" class="form-control" name="name" placeholder="Categoria">
-                            </div>
-                            <input type="hidden" id="slug" name="slug">
-                            <button type="submit" class="btn btn-outline-success"> <i class="fa-solid fa-plus me-"></i>
-                                <span>Guardar</span> </button>
-                        </form>
 
-                    </div>
+                    <form method="POST" action="/admin/category/add">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Categoria</label>
+                            <input type="text" id="name" class="form-control" name="name" placeholder="Categoria">
+                        </div>
+                        <input type="hidden" id="slug" name="slug">
+                        <button type="submit" class="btn btn-success rounded-pill px-3"> <i class="fa-solid fa-plus me-"></i>
+                            <span>Guardar</span> </button>
+                    </form>
+
                 </div>
+
             </div>
         </div>
     </div>

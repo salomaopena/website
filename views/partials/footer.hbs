@@ -19,34 +19,3 @@
 
 </footer>
 
-
-<script>
-
-  document.addEventListener("DOMContentLoaded", function () {
-    function toggleSidebar() {
-      let sidebar = document.getElementById('sidebar');
-      let content = document.getElementById('content');
-      if (sidebar.style.width === '250px' || sidebar.style.width === '') {
-        sidebar.style.width = '0';
-        content.style.marginLeft = '0';
-      } else {
-        sidebar.style.width = '250px';
-        content.style.marginLeft = '250px';
-      }
-    }
-
-    document.querySelector(".toggle-btn").addEventListener("click", toggleSidebar);
-  });
-</script>
-
-
-<script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="assets/fontawesome/js/all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/api.js"></script>
-<!--Sweetalert-->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</body>
-
-</html>

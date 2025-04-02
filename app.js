@@ -7,7 +7,8 @@ const cors = require("cors");
 const path = require('node:path')
 const dotenv = require('dotenv');
 const api = require('./routes/api');
-const frontEnd = require('./routes/frontEnd');
+const admin = require('./routes/admin');
+const defaultRoute = require('./routes/default');
 
 dotenv.config();
 const app = express();
@@ -36,8 +37,8 @@ app.engine('hbs', exphbs.engine({
     layoutsDir: path.join(__dirname, 'views', 'layouts'), // Diretório dos layouts
 }));
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'views'));
 
+// Middleware
 // Middleware
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());            // Para suportar JSON no body
@@ -45,7 +46,8 @@ app.use(express.urlencoded({ extended: true })); // Para suportar form-urlencode
 app.use(cookieParser());            // Middleware para habilitar cookies
 
 // Rotas
-app.use('/', frontEnd);
+app.use('/', defaultRoute);
+app.use('/admin', admin);
 app.use('/api', api);
 
 // Servidor

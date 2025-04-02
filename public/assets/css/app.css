@@ -142,6 +142,11 @@ sidebar
   text-decoration: none;
 }
 
+.text-decoration-none{
+  text-decoration: none;
+  color:#290000;
+}
+
 
 
 /*carousel*/
