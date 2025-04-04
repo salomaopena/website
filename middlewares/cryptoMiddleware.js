@@ -16,6 +16,7 @@ function encrypt(data) {
     };
 }
 
+
 // Função para descriptografar e converter de volta ao tipo original
 function decrypt(encryptedData, ivHex) {
     const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(ivHex, "hex"));

@@ -12,7 +12,7 @@ const defaultRoute = require('./routes/default');
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 app.use(session({
     secret: process.env.SECRET_KEY,

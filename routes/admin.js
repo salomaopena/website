@@ -31,7 +31,7 @@ router.get('/categories', verificarSessao, async (req, res) => {
         const categories = response.data.categories;; // 
         res.render('admin/categories/list', { categories: categories, title: "Categorias", user: req.session.user }); // Envia os  para o Handlebars
     } catch (error) {
-        //res.render('admin/categories/list', { error: "Erro ao buscar usuários" });
+        res.render('admin/categories/list', { error: "Erro ao buscar usuários" });
         console.log("Erro ao buscar categoria: ", error)
     }
 });
@@ -87,14 +87,14 @@ router.get("/news", verificarSessao, (req, res) => {
 
 
 
-
+/*
 router.get("/sessao", (req, res) => {
     if (req.session.user) {
         res.json({ status: "Sessão ativa", user: req.session.user });
     } else {
         res.json({ status: "Nenhum usuário na sessão" });
     }
-});
+});*/
 
 
 module.exports = router;
